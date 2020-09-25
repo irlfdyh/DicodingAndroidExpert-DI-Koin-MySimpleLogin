@@ -4,17 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_home.*
+import org.koin.android.ext.android.inject
 
 class HomeActivity : AppCompatActivity() {
 
-    lateinit var userRepository: UserRepository
+    val userRepository: UserRepository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-        val sesi = SessionManager(this)
-        userRepository = UserRepository.getInstance(sesi)
 
         tv_welcome.text = "Welcome ${userRepository.getUser()}"
 
